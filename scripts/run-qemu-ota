@@ -1,4 +1,4 @@
-#! /usr/bin/env python
+#! /usr/bin/env python3
 
 from argparse import ArgumentParser
 from subprocess import Popen
@@ -62,7 +62,7 @@ def main():
     try:
         qemu_command = QemuCommand(args)
     except ValueError as e:
-        print(e.message)
+        print(e)
         sys.exit(1)
 
     cmdline = qemu_command.command_line()
