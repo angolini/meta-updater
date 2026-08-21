@@ -90,7 +90,7 @@ class QemuCommand(object):
                         else:
                             copyfile(uboot_path, new_uboot_path)
                 uboot_path = new_uboot_path
-            if not exists(uboot_path) and not (self.dry_run and not exists(self.overlay)):
+            if not exists(uboot_path) and not (self.dry_run and self.overlay and not exists(self.overlay)):
                 raise ValueError("U-Boot image %s does not exist" % uboot_path)
             self.bios = uboot_path
         else:
@@ -118,7 +118,7 @@ class QemuCommand(object):
             self.image = new_image_path
         else:
             self.image = realpath(image)
-        if not exists(self.image) and not (self.dry_run and not exists(self.overlay)):
+        if not exists(self.image) and not (self.dry_run and self.overlay and not exists(self.overlay)):
             raise ValueError("OS image %s does not exist" % self.image)
 
         if args.mac:
